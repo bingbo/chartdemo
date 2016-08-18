@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Charts Demo!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-3d.js"></script>
+<script src="/js/themes/gray.js"></script>
+</head>
+<body>
+<h1>Charts Demo</h1>
+
+<div id="container6" style="width:100%; height:400px;"></div>
+<div id="container5" style="width:100%; height:400px;"></div>
+<div id="container4" style="width:100%; height:400px;"></div>
+<div id="container0" style="width:100%; height:400px;"></div>
+<div id="container" style="width:100%; height:400px;"></div>
+<div id="container1" style="width:100%; height:400px;"></div>
+<div id="container2" style="width:100%; height:400px;"></div>
+<div id="container3" style="width:100%; height:400px;"></div>
+
+</body>
+
+<script>
+    $(function(){
+        /*
+        Highcharts.setOptions({
+            chart: {
+                backgroundColor: {
+                    stops: [
+                        [0, 'rgb(255, 255, 255)'],
+                        [1, 'rgb(240, 240, 255)']
+                    ]
+                },
+                borderWidth: 2,
+                plotBackgroundColor: 'rgba(255, 255, 255, .9)',
+                plotShadow: true,
+                plotBorderWidth: 1
+            }
+        });
+        */
+        /**************3d chart**************/
+        $('#container6').highcharts({
+            title:{text:'3d pie chart'},
+            chart: {
+                type: 'pie',
+                margin: 75,
+                options3d: {
+                    enabled: true,
+                    alpha: 45,
+                    beta: 0,
+                }
+            },
+            plotOptions: {
+                pie: {
+                    depth: 50,
+                }
+            },
+            series: [{
+                data: [1, 2, 4, 3, 2, 4],
+                stack: 0
+            }]
+                                                                                                                                                                                });
+
+        /**************3d chart**************/
+        $('#container5').highcharts({
+            title:{text:'3d column chart'},
+            chart: {
+                type: 'column',
+                margin: 75,
+                options3d: {
+                    enabled: true,
+                    alpha: 15,
+                    beta: 15,
+                    depth: 100
+                }
+            },
+            plotOptions: {
+                column: {
+                    depth: 40,
+                    stacking:true,
+                    grouping:false,
+                    groupZPadding:10
+                }
+            },
+            series: [{
+                data: [1, 2, 4, 3, 2, 4],
+                stack: 0
+                },
+                {
+                    data: [5, 6, 3, 4, 1, 2],
+                    stack: 0
+                },
+                {
+                    data: [7, 9, 8, 7, 5, 8],
+                    stack: 1
+                }
+            ]
+                                                                                                                                                                                });
+        /***************test****************/
+        var chart = new Highcharts.Chart({
+            title:{text:'test1'},
+            subtitle:{text:'subtxt1'},
+            chart:{
+                renderTo:'container4',
+                type:'column'
+            },
+            xAxis:{
+                categories:['Green', 'Pink',1,2,3]
+            },
+            series:[{
+                data:[
+                    {
+                        name:'point1',
+                        color:'#00ff00',
+                        y:60
+                    },
+                    {
+                        name:'point2',
+                        color:'#00fff0',
+                        y:4
+                    },{
+                        name:'point3',
+                        color:'#00ffff',
+                        y:2
+                    },{
+                        name:'point4',
+                        color:'#ffff00',
+                        y:1
+                    },{
+                        name:'point5',
+                        color:'#f0ff00',
+                        y:3
+                    },
+                    {
+                        name:'point6',
+                        color:'#fff000',
+                        y:5
+                    },
+                ]
+            }]
+        });
+
+        /***************test****************/
+        var char0=new Highcharts.Chart({
+            chart:{renderTo:'container0'},
+            title:{text:'test chart'},
+            subtitle:{text:'test subtitle'},
+            xAxis:{
+                //type:'datetime',
+                categories:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            //点的一些属性配置
+            plotOptions:{
+                series:{
+                    //点是否可以选择,chart.getSelectedPoints()获取选择的点
+                    allowPointSelect:true
+                },
+                line:{
+                    //显示数据标签，即要点上显示数据
+                    dataLabels:{enabled:true}
+                },
+
+            },
+            /**图例**/
+            legend:{
+                //鼠标悬浮颜色
+                itemHoverStyle: {
+                    color: '#000fff'
+                },
+                title:{
+                    style:{fontStyle:'italic'},
+                    text:'legend'
+                },
+                layout:'vertical',
+                align:'right',
+                verticalAlign:'top',
+                x:-10,
+                y:100
+            },
+            /**浮层**/
+            tooltip: {
+                //背景设置
+                backgroundColor: {
+                    linearGradient: [0, 0, 0, 60],
+                    stops:[
+                        [0, '#FFFFFF'],
+                        [1, '#E0E0E0']
+                    ]
+                },
+                borderColor: 'black',
+                borderRadius: 10,
+                borderWidth: 1,
+                fontColor:'red',
+                //显示浮层文案
+                formatter: function() {
+                    return 'The value for <b>' + this.x + '</char0b> is <b>' + this.y + '</char0b>, in series '+ this.series.name;
+                },
+                //显示基准线x,y轴都显示
+                crosshairs: [true,true],
+            },
+            series:[{
+                //线的名字
+                name:'line1',
+                //线上Y轴上的点
+                data:[29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, {y:216.4,marker: { fillColor: '#BF0B23', radius: 10 }}, 194.1, 95.6, 54.4],
+                //线的宽度
+                lineWidth:5,
+                //鼠标形状
+                cursor:'pointer',
+                //线条形状,虚线或实线
+                dashStyle:'longdash',
+                zoneAxis: 'x',
+                //不同的区间或值可显示不同的颜色
+                zones:[
+                    {
+                        value:0,
+                        color:'#f7a35'
+                    },
+                    {
+                        dashStyle: 'dot',
+                        value:40,
+                        color:'#7db5ec'
+                    },
+                    //默认颜色
+                    {
+                        color:'#f7a35'
+                    }
+                
+                ],
+
+            },
+            //第二条线的数据
+            {
+                name:'line2',//如果没有name,则显示默认的series n等
+                data:[22,33,11,44,99,45,56,80,90,123,34,76,{y:100,color: '#BF0B23'}],
+            }
+            ]
+        });
+
+        /********************************条状图*********************/
+        $('#container').highcharts({
+            chart:{type:'bar'},
+            title:{text:'Fruit Consumption'},
+            subtitle:{text:'subtitle'},
+            xAxis:{categories:['Apples', 'Bananas', 'Oranges']},
+            yAxis:{title:{text:'Fruit eaten'}},
+            series:[
+                {
+                    name:'Jane',
+                    data:[1,0,4]
+                },
+                {
+                    name:'John',
+                    data:[5,7,3]
+                }
+            ]
+        });
+
+
+        /********************线性图**************************/
+        var char1=new Highcharts.Chart({
+            chart:{renderTo:'container1'},
+            title:{text:'date chart'},
+            subtitle:{text:'subtitle'},
+            xAxis:{type:'datetime'},
+            series:[{
+                data:[29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                pointStart:Date.UTC(2010,0,1),
+                pointInterval:3600*1000
+            }]
+        });
+
+        /********************柱状图***********************/
+        var chart2=new Highcharts.Chart({
+            title: {
+                text: 'column chart'
+            },
+            subtitle: {
+                text: 'Source: subtitle'
+            },
+            chart:{
+                renderTo:'container2',
+                type:'column'
+            },
+            xAxis:{type:'datetime'},
+            series:[{
+                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                pointStart: Date.UTC(2010, 0, 1),
+                pointInterval: 3600 * 1000 // one hour
+            }]
+        });
+    });
+
+
+    /********************饼状图************************/
+    var colors = Highcharts.getOptions().colors,
+        categories = ['MSIE', 'Firefox', 'Chrome', 'Safari', 'Opera'],
+        data = [{
+            y: 56.33,
+            color: colors[0],
+            drilldown: {
+                name: 'MSIE versions',
+                categories: ['MSIE 6.0', 'MSIE 7.0', 'MSIE 8.0', 'MSIE 9.0', 'MSIE 10.0', 'MSIE 11.0'],
+                data: [1.06, 0.5, 17.2, 8.11, 5.33, 24.13],
+                color: colors[0]
+            }
+        }, {
+            y: 10.38,
+            color: colors[1],
+            drilldown: {
+                name: 'Firefox versions',
+                categories: ['Firefox v31', 'Firefox v32', 'Firefox v33', 'Firefox v35', 'Firefox v36', 'Firefox v37', 'Firefox v38'],
+                data: [0.33, 0.15, 0.22, 1.27, 2.76, 2.32, 2.31, 1.02],
+                color: colors[1]
+            }
+        }, {
+            y: 24.03,
+            color: colors[2],
+            drilldown: {
+                name: 'Chrome versions',
+                categories: ['Chrome v30.0', 'Chrome v31.0', 'Chrome v32.0', 'Chrome v33.0', 'Chrome v34.0',
+                    'Chrome v35.0', 'Chrome v36.0', 'Chrome v37.0', 'Chrome v38.0', 'Chrome v39.0', 'Chrome v40.0', 'Chrome v41.0', 'Chrome v42.0', 'Chrome v43.0'
+                    ],
+                data: [0.14, 1.24, 0.55, 0.19, 0.14, 0.85, 2.53, 0.38, 0.6, 2.96, 5, 4.32, 3.68, 1.45],
+                color: colors[2]
+            }
+        }, {
+            y: 4.77,
+            color: colors[3],
+            drilldown: {
+                name: 'Safari versions',
+                categories: ['Safari v5.0', 'Safari v5.1', 'Safari v6.1', 'Safari v6.2', 'Safari v7.0', 'Safari v7.1', 'Safari v8.0'],
+                data: [0.3, 0.42, 0.29, 0.17, 0.26, 0.77, 2.56],
+                color: colors[3]
+            }
+        }, {
+            y: 0.91,
+            color: colors[4],
+            drilldown: {
+                name: 'Opera versions',
+                categories: ['Opera v12.x', 'Opera v27', 'Opera v28', 'Opera v29'],
+                data: [0.34, 0.17, 0.24, 0.16],
+                color: colors[4]
+            }
+        }, {
+            y: 0.2,
+            color: colors[5],
+            drilldown: {
+                name: 'Proprietary or Undetectable',
+                categories: [],
+                data: [],
+                color: colors[5]
+            }
+        }],
+        browserData = [],
+        versionsData = [],
+        i,
+        j,
+        dataLen = data.length,
+        drillDataLen,
+        brightness;
+
+
+    // Build the data arrays
+    for (i = 0; i < dataLen; i += 1) {
+
+        // add browser data
+        browserData.push({
+            name: categories[i],
+            y: data[i].y,
+            color: data[i].color
+        });
+
+        // add version data
+        drillDataLen = data[i].drilldown.data.length;
+        for (j = 0; j < drillDataLen; j += 1) {
+            brightness = 0.2 - (j / drillDataLen) / 5;
+            versionsData.push({
+                name: data[i].drilldown.categories[j],
+                y: data[i].drilldown.data[j],
+                color: Highcharts.Color(data[i].color).brighten(brightness).get()
+            });
+        }
+    }
+
+    // Create the chart
+    $('#container3').highcharts({
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Browser market share, January, 2015 to May, 2015'
+        },
+        subtitle: {
+            text: 'Source: <a href="http://netmarketshare.com/">netmarketshare.com</a>'
+        },
+        yAxis: {
+            title: {
+                text: 'Total percent market share'
+            }
+        },
+        plotOptions: {
+            pie: {
+                shadow: false,
+                center: ['50%', '50%']
+            }
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        series: [{
+            name: 'Browsers',
+            data: browserData,
+            size: '60%',
+            dataLabels: {
+                formatter: function () {
+                    return this.y > 5 ? this.point.name : null;
+                },
+                color: '#ffffff',
+                distance: -30
+            }
+        }, {
+            name: 'Versions',
+            data: versionsData,
+            size: '80%',
+            innerSize: '60%',
+            dataLabels: {
+                formatter: function () {
+                    // display only if larger than 1
+                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '%' : null;
+                }
+            }
+        }]
+    });
+    /********************饼状图************************/
+</script>
+</html>
